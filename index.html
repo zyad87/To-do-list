@@ -15,46 +15,39 @@
 
 </head>
 <body>
-    <div class="container mt-3">
-        <h2></h2>
-        <div class="col-md-12 col-12 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4>القائمة</h4>
-                    <button class="btn btn-primary hint--bottom" id="add_btn" aria-label="قم بأضافة مهمة جديدة" type="button" data-mdb-ripple-color="dark">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                    <button class="btn btn-danger hint--bottom me-2 disabled" id="all_dalet" aria-label="حذف جميع المهام" type="button" data-mdb-ripple-color="dark">
-                        حذف الكل
-                            </button>
-                    <div class="d-flex justify-content-center pt-3 ">
-                        <div class="input-group w-100">
+    <div class="container">
+        <div id="allertq"></div>
+        <div class="card">
+            <div class="card-header">
+                <h4>القائمة </h4>
+                <button class="btn btn-primary hint--bottom" id="add_btn" aria-label="قم بأضافة مهمة جديدة" type="button" data-mdb-ripple-color="dark">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <button class="btn btn-danger hint--bottom me-2 disabled" id="all_dalet" aria-label="حذف جميع المهام" type="button" data-mdb-ripple-color="dark">
+                    حذف الكل
+                </button>
+            </div>
+            <div class="card-body">
+                <small style="border-radius: 10px;" class="bg-success-subtle p-2 text-center">عدد المهام المكتملة: <span id="completedTasksCount"></span></small>
+                <div class="row mt-3" id="tbody">
 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <table class="table table-hover table-borderless">
-                        <tbody id="tbody">
-                        
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
-        <div id="allertq"></div>
     </div>
-    <footer class="bg-dark text-center text-white fixed-bottom">
+    
+    <footer class="bg-dark text-center text-white mt-5">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             <p>
                 &copy; 2024 جميع الحقوق محفوظة || تصميم و تطوير : ZYAD
                 <a href="https://api.whatsapp.com/send/?phone=966551262599&text&type=phone_number&app_absent=0" target=_blank class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
                 [ قم بالضغط هنا للتواصل ]</a>
-                </p>
+            </p>
         </div>
         <!-- Copyright -->
-      </footer>
+    </footer>
+    
+
         
     
 

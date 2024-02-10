@@ -13,30 +13,48 @@ function filltasks() {
     if (tasks !== null) {
         let content = '';
         if (tasks.length == 0) {
-            content = `<tr><td colspan="3"><p style="text-align: center;">لاتوجد مهمة</p></td></tr>`;
+            content = `<p style="text-align: center;">لاتوجد مهمة</p>`;
         } else {
+            let completedTasksCount = 0; // تهيئة عداد المهام المكتملة
             for (let index = 0; index < tasks.length; index++) {
                 const taskloop = tasks[index];
                 content += `
-                <tr class="${taskloop.isDone ? 'table-success' : ''}">
-                  <td >${taskloop.title}</td>
-                  <td>${taskloop.date}</td>
-                  <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-    
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                <div class="card ${taskloop.isDone ? 'text-bg-success' : ''} ms-1">
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
                         ${taskloop.isDone ? `
-                        <button onclick="isdone(${index})" type="button" class="btn btn-success btn-dark me-2"><i class="fa-solid fa-minus"></i></button>
+                        <p><s>${taskloop.title}</s></p>  
                         ` : `
-                        <button onclick="isdone(${index})" type="button" class="btn btn-success btn-success me-2"><i class="fa-solid fa-check"></i></button>
+                        <p>${taskloop.title}</p>
                         `}
-    
-                      <button onclick="edittask(${index})" type="button" class="btn btn-secondary me-2"><i class="fas fa-pencil-alt"></i></button>
-                      <button onclick="deletask(${index})" type="button" class="btn btn-danger me-2"><i class="fas fa-trash"></i></button>
-                    </div>
-                  </td>
-                </tr>
+                        ${taskloop.isDone ? `
+                        <figcaption class="blockquote-footer text-white">${taskloop.date}</figcaption>
+                        ` : `
+                        <figcaption class="blockquote-footer">${taskloop.date}</figcaption>
+                        `}
+            <div class="btn-group mt-2" role="group" aria-label="Basic example">
+                ${taskloop.isDone ? `
+                <button onclick="isdone(${index})" type="button" class="btn btn-success btn-dark me-2"><i class="fa-solid fa-minus"></i></button>
+                ` : `
+                <button onclick="isdone(${index})" type="button" class="btn btn-success btn-success me-2"><i class="fa-solid fa-check"></i></button>
+                `}
+                <button onclick="edittask(${index})" type="button" class="btn btn-secondary me-2"><i class="fas fa-pencil-alt"></i></button>
+                <button onclick="deletask(${index})" type="button" class="btn btn-danger me-2"><i class="fas fa-trash"></i></button>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+
                 `;
-            }
+                // تحديث عداد المهام المكتملة إذا كانت المهمة قد تمت
+                if(taskloop.isDone) {
+                    completedTasksCount++;
+                }            }
+                document.querySelector("#completedTasksCount").textContent = completedTasksCount;
+
         }
         document.getElementById("tbody").innerHTML = content;
             if (tasks.length > 1) {
@@ -50,6 +68,14 @@ function filltasks() {
         tasks = [];
     }
 }
+
+function fcompletedTasksCount(){
+    let completedTasksCount = tasks.filter(task => task.isDone).length;
+    let asksCount = tasks.length
+    document.getElementById("completedTasksCount").textContent = `${completedTasksCount} من ${asksCount}`;
+}
+
+
 
 
 
@@ -90,6 +116,7 @@ document.getElementById("add_btn").addEventListener("click", function() {
         // *?---------------------------------- التخزين
         stortasks();
         filltasks();
+        fcompletedTasksCount()
     } else {
         alert("الرجاء إدخال عنوان للمهمة. لا يمكن ترك الحقل فارغًا")
         }
@@ -107,6 +134,8 @@ document.getElementById("add_btn").addEventListener("click", function() {
             tasks.splice(index,1)
             stortasks()
             filltasks()
+            fcompletedTasksCount()
+            
         }
     }
 
@@ -119,6 +148,7 @@ function edittask(index){
         taskalert.title = newtasknema.trim(); // تعديل هنا
         stortasks()
         filltasks();
+        fcompletedTasksCount()
     } else {
         alert("الرجاء إدخال عنوان للمهمة. لا يمكن ترك الحقل فارغًا")
     }
@@ -133,6 +163,7 @@ document.getElementById("all_dalet").addEventListener("click", function(){
         tasks = [];
         stortasks()
         filltasks();
+        fcompletedTasksCount()
     }
     })
 
@@ -151,6 +182,7 @@ function isdone(index){
     }
     stortasks()
     filltasks();
+    fcompletedTasksCount()
 }
 
 
